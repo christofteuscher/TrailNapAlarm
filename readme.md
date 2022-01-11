@@ -24,7 +24,7 @@ relaxed and you may begin to have slow-wave (delta) brain activity.
 * [src]()
     * Source code files belong here
 * [tools]()
-    * Tools like Makefile and other scrips belong here
+    * Tools like Makefile and other scripts belong here
 * [docs]()
     * Documentation files belong here
 * [dep]()
