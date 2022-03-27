@@ -1,6 +1,8 @@
 # directories
-/res/data/generatedData/
-/res/figures/generatedFigs/
+/res/data/generatedData/*
+/res/figures/generatedFigs/*
+!/res/data/generatedData/.gitkeep
+!/res/figures/generatedFigs/.gitkeep
 
 # Mac files
 .DS_Store
