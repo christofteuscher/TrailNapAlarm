@@ -11,7 +11,7 @@ import time
 files = sorted(glob.glob('../res/data/generatedData/*.wav'), key=os.path.getmtime)
 
 # choose which segment to plot
-file = files[11]
+file = files[10]
 
 begin = time.time()
 spindlePlot(file)
