@@ -31,3 +31,9 @@ relaxed and you may begin to have slow-wave (delta) brain activity.
     * Dependencies belong here
 * [res]()
     * Resource files belong here
+
+## Citation
+
+This project makes use of the Yasa sleep detection algorithm.
+
+* Vallat, Raphael, and Matthew P. Walker. "An open-source, high-performance tool for automated sleep staging." Elife 10 (2021). doi: https://doi.org/10.7554/eLife.70092
