@@ -1,3 +1,7 @@
+# directories
+/res/data/generatedData/
+/res/figures/generatedFigs/
+
 # Mac files
 .DS_Store
 

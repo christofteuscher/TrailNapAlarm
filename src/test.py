@@ -8,7 +8,7 @@ import time
 # no output will be plotted if event isn't detected
 
 # import and sort file paths into array
-files = sorted(glob.glob('../res/data/*.wav'), key=os.path.getmtime)
+files = sorted(glob.glob('../res/data/generatedData/*.wav'), key=os.path.getmtime)
 
 # choose which segment to plot
 file = files[11]

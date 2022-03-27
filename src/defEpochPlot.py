@@ -41,7 +41,7 @@ def spindlePlot(file):
     plt.xlabel('time (s)')
     plt.ylabel('amplitude (uV)')
     # save and close figure
-    plt.savefig(f"../res/figures/{title}_timeseries.png")
+    plt.savefig(f"../res/figures/generatedFigs/{title}_timeseries.png")
     plt.close()
 
     # plot power spectral density
@@ -52,7 +52,7 @@ def spindlePlot(file):
     plt.xlabel('frequency (Hz)')
     plt.ylabel('magnitude (dB)')
     # save and close figure
-    plt.savefig(f"../res/figures/{title}_psd.png")
+    plt.savefig(f"../res/figures/generatedFigs/{title}_psd.png")
     plt.close()
 
     # threshold 1: sigma band detection
@@ -81,7 +81,7 @@ def spindlePlot(file):
     plt.legend()
     _ = ax2.set_title('Relative power in the sigma band')
     # save figure
-    plt.savefig(f"../res/figures/{title}_sigma_rel_power.png")
+    plt.savefig(f"../res/figures/generatedFigs/{title}_sigma_rel_power.png")
 
     # threshold 2: moving correlation
     data_sigma = filter_data(epoch.tSeries, fs, 12, 15, l_trans_bandwidth=1.5, 
@@ -98,7 +98,7 @@ def spindlePlot(file):
     plt.legend()
     plt.title('Moving correlation between $EEG_{bf}$ and $EEG_{\sigma}$')
     _ = plt.xlim(0, epoch.t[-1])
-    plt.savefig(f"../res/figures/{title}_movcorrel.png")
+    plt.savefig(f"../res/figures/generatedFigs/{title}_movcorrel.png")
 
     # threshold 3: moving rms
     t, mrms = yasa.moving_transform(data_sigma, epoch.tSeries, fs, window=.3, step=.1, method='rms', interp=True)
@@ -115,7 +115,7 @@ def spindlePlot(file):
     plt.legend()
     plt.title('Moving RMS of $EEG_{\sigma}$')
     _ = plt.xlim(0, epoch.tSeries[-1])
-    plt.savefig(f"../res/figures/{title}_movrms.png")
+    plt.savefig(f"../res/figures/generatedFigs/{title}_movrms.png")
 
 def swPlot(file):
     # get epoch title
@@ -153,4 +153,4 @@ def swPlot(file):
     plt.xlim([0, epoch.t[-1]])
     plt.title('sleep EEG data')
     plt.legend()
-    plt.savefig(f"../res/figures/{title}_slowwaves.png")
+    plt.savefig(f"../res/figures/generatedFigs/{title}_slowwaves.png")

@@ -34,6 +34,6 @@ while i <= numEpochs:
     endindex = startindex + Nepoch
     y = Fz[startindex:endindex]
     filename = f"Fz_{i}"
-    write(f"../res/data/{filename}.wav",fs,y.astype(np.int16))
+    write(f"../res/data/generatedData/{filename}.wav",fs,y.astype(np.int16))
     i += 1
     
