@@ -8,6 +8,9 @@ from defEpoch import Epoch
 
 # This file defines functions for visualizing
 # yasa detection functions
+# much of this code was copied from 
+# yasa notebooks by Raphael Vallat
+# https://github.com/raphaelvallat/yasa/tree/master/notebooks
 
 def spindlePlot(file):
     # get epoch title
