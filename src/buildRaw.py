@@ -42,8 +42,7 @@ def buildRawFromNpz(fs, filepath):
 def buildRawFromWav(filepath):
     # read sample freq and data from file
     fs, data = read(filepath)
-    N = data.size
-    data = [data,np.zeros(N)]
+    data = [data,data]
 
     num_chan = 2
     ch_names = ['Fz', 'Fp1']
@@ -64,8 +63,7 @@ def buildRawFromWav(filepath):
     return raw
 
 def buildRawFromArray(fs, array):
-    N = len(array)
-    array = [array,np.zeros(N)]
+    array = [array,array]
 
     num_chan = 2
     ch_names = ['Fz', 'Fp1']

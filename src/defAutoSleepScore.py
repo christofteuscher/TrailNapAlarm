@@ -23,16 +23,8 @@ def autoSleepScore(files):
     print(y_pred)
 
 #filepath = '../res/data/generatedData/Fz_10.wav'
-files = ['../res/data/generatedData/Fz_9.wav',
-         '../res/data/generatedData/Fz_10.wav',
-         '../res/data/generatedData/Fz_11.wav',
-         '../res/data/generatedData/Fz_12.wav',
-         '../res/data/generatedData/Fz_13.wav',
-         '../res/data/generatedData/Fz_14.wav',
-         '../res/data/generatedData/Fz_15.wav',
-         '../res/data/generatedData/Fz_16.wav',
-         '../res/data/generatedData/Fz_17.wav',
-         '../res/data/generatedData/Fz_18.wav',
-         '../res/data/generatedData/Fz_19.wav',
-         '../res/data/generatedData/Fz_20.wav',]
+files = []
+for i in range(12):
+    files.append(f"../res/data/generatedData/Fz_{i+8}.wav")
+
 autoSleepScore(files)
