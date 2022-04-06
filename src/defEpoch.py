@@ -22,4 +22,3 @@ class Epoch:
     # state variable defaults to "raw" unanalyzed data
     # when not default, stores detected sleep stage
     state = "raw"
-
