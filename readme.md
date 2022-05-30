@@ -1,5 +1,6 @@
 # Trail Nap Alarm
 ## Overview
+![Abstract block diagram](res/figures/docFigs/device_abstract.png)
 ### Introduction and problem statement:
 Ultra marathon runners, i.e., runners who run distances longer than a marathon, often do “trail naps,” i.e., they simply lay down on the trail and power nap for 5-10min. When it’s cold, one wakes up after a short period of time, but when it’s warm(er), it’s likely that the runner will sleep longerthan they want. Setting an alarm is tedious, time-consuming, and the alarm may not be heard. Also,sometimes it takes a few minutes to fall asleep, so estimating the wake-up time is hard and the resulting sleep time is rarely ideal.
 The goal of this project is to build a device that monitors a runner’s sleep and wakes them up aftersleep stage N1, before they fall into a REM sleep pattern. Non-REM sleep has 3 stages ([Source:](https://www.uofmhealth.org/health-library/hw48331)):
