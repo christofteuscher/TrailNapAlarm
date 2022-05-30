@@ -15,11 +15,9 @@ relaxed and you may begin to have slow-wave (delta) brain activity.
 3. An integration of these two sub-components into a fully functional system. Cables should be avoided. If communication between sub-systems is necessary, that should rely on Bluetooth or other protocols.
 4. The system must be battery-powered. The batteries should last for at least 3 days (72 hours). The batteries should be rechargeable with a USB cable.
 5. The overall system must be small, non-invasive, light, water-proof, easy to use, and have no on-off or other switches.
-### Deliverables
-* A fully functional prototype.
-* Code (on Github), nicely documented
-* A final report
-* A final presentation
+
+## Project status
+This project is unfinished and serves only as a proof-of-concept. The intention is for the final product to be as passively-operational as possible - meaning that all the user has to do is turn it on and wear it during a nap, then turn it off when they are woken up. For further development, please refer to the [documentation in the wiki for this repository](https://github.com/cteusche/TrailNapAlarm/wiki).
 
 ## Directory structure
 * [src]()
