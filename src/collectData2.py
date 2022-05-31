@@ -1,5 +1,3 @@
-
-
 import time
 import numpy as np
 
@@ -10,7 +8,7 @@ from every import every
 
 bus = SMBus(2)
 
-adc_sample_config = [0x85, # Precision selection
+adc_sample_config = [0xB5, # Precision selection
                      0x83] # ???
 
 def ads1115_read_a0(): # ads1115
