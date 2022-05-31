@@ -34,7 +34,7 @@ def sample_accumulate(sample_rate=200, epoch_seconds=30):
     def sample():
         nonlocal epoch, epoch_i, epoch_num
         
-        val, raw, *_ = ads1115_read_a0()
+        val, raw, *_ = ads1115_read_a2()
         epoch[epoch_i] = raw
         if __debug__:
             print("\rSecond: {:4d} Sample: {:3d} Value: {:1.3f}  {:8f}".format(epoch_i // sample_rate, epoch_i % sample_rate, val, raw), end="", flush=True)
