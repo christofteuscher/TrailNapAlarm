@@ -11,7 +11,7 @@ bus = SMBus(2)
 adc_sample_config = [0xB5, # Precision selection
                      0x83] # ???
 
-def ads1115_read_a0(): # ads1115
+def ads1115_read_a2(): # ads1115
     global bus, adc_sample_config
     
     # Sample I2C data.
