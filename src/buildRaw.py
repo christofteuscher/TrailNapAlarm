@@ -1,7 +1,6 @@
 import mne
 import numpy as np
 from scipy.io.wavfile import read
-import matplotlib.pyplot as plt
 
 # this file loads data into an raw mne format
 # storing data like this allows us to include metadata in a way
@@ -12,7 +11,6 @@ def buildRawFromNpz(fs, filepath):
     # load data
     x = np.load(filepath)
     data, chan_names = x['data'], x['chan']
-    #times = np.arange(data.size) / fs
     num_chan = data.shape[0]
 
     # verify data
@@ -34,8 +32,6 @@ def buildRawFromNpz(fs, filepath):
     # sample data is not in SI units, which is what mne raw expects
     # we have to scale the data to the expected uV range
     raw.apply_function(lambda x: x * .2e-6)
-    raw.plot(show_scrollbars=False, show_scalebars=False)
-    plt.show()
 
     return raw
 
@@ -57,8 +53,6 @@ def buildRawFromWav(filepath):
     # sample data is not in SI units, which is what mne raw expects
     # we have to scale the data to the expected uV range
     raw.apply_function(lambda x: x * .2e-6)
-    #raw.plot(show_scrollbars=False, show_scalebars=False)
-    #plt.show()
 
     return raw
 
@@ -78,14 +72,5 @@ def buildRawFromArray(fs, array):
     # sample data is not in SI units, which is what mne raw expects
     # we have to scale the data to the expected uV range
     raw.apply_function(lambda x: x * .2e-6)
-    raw.plot(show_scrollbars=False, show_scalebars=False)
-    plt.show()
 
     return raw
-
-# test functions
-#filepath = '../res/data/yasaDatasets/data_full_6hrs_100Hz_Cz+Fz+Pz.npz'
-#buildRawFromNpz(100, filepath)
-
-filepath = '../res/data/generatedData/Fz_10.wav'
-raw = buildRawFromWav(filepath)
