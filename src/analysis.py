@@ -15,9 +15,10 @@ fullData = np.array([])
 # each array is the output of the yasa sleep stage prediction
 # where W = awake, N1, N2, N3 are sleep stages, and R is REM
 predictSets = []
+probSets = []
 
 # set up stream
-os.environ["PYTHONUNBUFFERED"] = "1"
+#os.environ["PYTHONUNBUFFERED"] = "1"
 
 for line in sys.stdin:
 
@@ -30,7 +31,7 @@ for line in sys.stdin:
             print("Do Reset")
 
         case ["FILE", filename]:
-
+            print("retreiving file ", filename)
             # get directory to save data to
             dirname = os.path.dirname(filename)
             # read file
@@ -42,15 +43,23 @@ for line in sys.stdin:
             fullData = np.concatenate((fullData,epoch), axis=None)
 
             if len(fullData) < Nmin:
-                continue
+                pass
             else:
                 # build mne raw object
                 raw = buildRawFromArray(fs,fullData)
                 # apply yasa analysis
                 sls = yasa.SleepStaging(raw, eeg_name="Fz")
                 y_pred = sls.predict()
+                y_prob = sls.predict_proba()
                 # add array of predictions for this chunk to array of chunk predictions
                 predictSets.append(y_pred)
-                print(f"{fs*len(fullData)} seconds analyzed")
-
+                probSets.append(y_prob)
+                print(f"{len(fullData)/fs} seconds analyzed")
             
+with open('predictions.txt', 'w') as f:
+    for line in predictSets:
+        print(' '.join(line).replace('W','W ').replace('R','R '), file=f)
+
+with open('predictprob.txt', 'w') as f:
+    for line in probSets:
+        print(' '.join(line), file=f)

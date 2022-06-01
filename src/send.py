@@ -10,12 +10,16 @@ print("RESET", flush=True)
 #	print("FILE", "filname{}.wav".format(i), flush=True)
 
 # test with local files
-path_to_files = "../res/data/sessions/prevsession/"
+path_to_files = "../res/data/sessions/prevsessions/"
 pathname = f"{path_to_files}unread_*.wav"
 files = sorted(glob.glob(pathname), key=os.path.getmtime)
+
+if __debug__:
+    print(f"Length of files: {len(files)}", file=sys.stderr)
+
 for file in files:
-    time.sleep(1)
-    print(file,flush=True)
+    time.sleep(.1)
+    print("FILE", file, flush=True)
 
 # py -3 send.py | py -3 -u read.py
-# python send.py | python -u recAnalysis.py
+# python send.py | python -u analysis.py
