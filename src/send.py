@@ -18,3 +18,4 @@ for file in files:
     print(file,flush=True)
 
 # py -3 send.py | py -3 -u read.py
+# python send.py | python -u recAnalysis.py
