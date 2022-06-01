@@ -62,4 +62,4 @@ with open('predictions.txt', 'w') as f:
 
 with open('predictprob.txt', 'w') as f:
     for line in probSets:
-        print(' '.join(line), file=f)
+        print(line, file=f)
