@@ -52,8 +52,15 @@ Fz = df[columns[2]]
 writePath = "../res/data/yasaDatasets/openBCI_Fz.wav"
 '''
 
-# read openBCI wav file from wav format
+# openBCI wav file
 filepath = '../res/data/openBCI_Fz.wav'
+writepath = '../res/data/sessions/prevsessions/'
+
+# yasa sample data
+filepath = '../res/data/yasaDatasets/Fz.wav'
+writepath = '../res/data/yasaDatasets/yasa_epochs/'
+
+# read file
 fs,Fz = read(filepath)
 
 # separate into 30 second epochs and write to wav files
@@ -69,6 +76,6 @@ while i <= numEpochs:
     endindex = startindex + Nepoch
     y = Fz[startindex:endindex]
     filename = f"Fz_{i}"
-    write(f"../res/data/sessions/prevsessions/unread_{filename}.wav",fs,y.astype(np.int16))
+    write(f"{writepath}unread_{filename}.wav",fs,y.astype(np.int16))
     i += 1
-    time.sleep(.5)
+    time.sleep(.1)
