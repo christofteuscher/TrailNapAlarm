@@ -1,14 +1,14 @@
 import numpy as np
 import math
 import pandas as pd
-from scipy.io.wavfile import write
+from scipy.io.wavfile import write,read
 import time
 
 # This program imports a .npz file format and extracts
 # it into 60 second segmented .wav files
 # This was written specifically for the dataset
 # included in the yasa documentation
-
+'''
 # npz data
 x = np.load('../res/data/yasaDatasets/data_full_6hrs_100Hz_Cz+Fz+Pz.npz')
 data, ch_names = x['data'], x['chan']
@@ -40,7 +40,6 @@ while i <= numEpochs:
     i += 1
     time.sleep(.5)
 
-'''
 # If the data is saved in the openBCI format:
 filepath = 'OpenBCI-RAW-2022-05-17_15-04-27 1 channel 20 mins.txt'
 fs = 250
@@ -51,13 +50,18 @@ columns = list(df)
 # extract a particular column:
 Fz = df[columns[2]]
 writePath = "../res/data/yasaDatasets/openBCI_Fz.wav"
+'''
+
+# read openBCI wav file from wav format
+filepath = '../res/data/openBCI_Fz.wav'
+fs,Fz = read(filepath)
 
 # separate into 30 second epochs and write to wav files
 N = Fz.size
 seconds = 30
 Nepoch = seconds * fs   # number of samples per epoch
 numEpochs = int(math.floor(N/Nepoch))
-print(numEpochs)
+print(f"{numEpochs} files to create")
 
 i = 0
 while i <= numEpochs:
@@ -68,4 +72,3 @@ while i <= numEpochs:
     write(f"../res/data/sessions/prevsessions/unread_{filename}.wav",fs,y.astype(np.int16))
     i += 1
     time.sleep(.5)
-'''
