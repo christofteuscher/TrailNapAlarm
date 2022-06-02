@@ -5,17 +5,23 @@ import numpy as np
 from pathlib import Path
 from scipy.io.wavfile import read
 import os
-import glob
-import time
+
+# suppress sklearn pickle warning
+def warn(*args, **kwargs):
+    pass
+import warnings
+warnings.warn = warn
 
 # data storage setup
 # define array in which to concat entire session data
 fullData = np.array([])
-# define array of yasa prediction arrays
-# each array is the output of the yasa sleep stage prediction
-# where W = awake, N1, N2, N3 are sleep stages, and R is REM
+# define arrays of yasa prediction arrays
 predictSets = []
 probSets = []
+# define minimum nap length
+minNapMinutes = 8
+minNapEpochs = minNapMinutes * 2
+minN2epochs = 6
 
 # set up stream
 #os.environ["PYTHONUNBUFFERED"] = "1"
@@ -31,14 +37,17 @@ for line in sys.stdin:
             print("Do Reset")
 
         case ["FILE", filename]:
-            print("retreiving file ", filename)
+            if __debug__:
+                print("retreiving file ", filename)
             # get directory to save data to
             dirname = os.path.dirname(filename)
             # read file
             name = Path(filename).stem
             fs, epoch = read(filename)
-            # min length of data to analyse
+            # 5 min minimum length of data to analyse
             Nmin = fs * 60 * 5
+            # minimum nap length in samples
+            minNapSamples = fs * minNapMinutes * 60
             # concat to fullData
             fullData = np.concatenate((fullData,epoch), axis=None)
 
@@ -54,7 +63,15 @@ for line in sys.stdin:
                 # add array of predictions for this chunk to array of chunk predictions
                 predictSets.append(y_pred)
                 probSets.append(y_prob)
-                print(f"{len(fullData)/fs} seconds analyzed")
+                if __debug__:
+                    print(f"{len(fullData)/fs} seconds analyzed")
+
+            if len(fullData) > minNapSamples:
+                count = np.count_nonzero(y_pred[minNapEpochs:] == "N2")
+                print(f"counted {count} N2 stages")
+                if count >= minN2epochs:
+                    print("WAKEUP!")
+                    break
             
 with open('predictions.txt', 'w') as f:
     for line in predictSets:

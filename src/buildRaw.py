@@ -6,6 +6,8 @@ from scipy.io.wavfile import read
 # storing data like this allows us to include metadata in a way
 # that can be implemented with mne functions and saved as an edf file
 
+scaleFactor = 20e-6
+
 def buildRawFromNpz(fs, filepath):
 
     # load data
@@ -14,8 +16,8 @@ def buildRawFromNpz(fs, filepath):
     num_chan = data.shape[0]
 
     # verify data
-    print(data.shape, chan_names)
-    print(np.round(data[:, 0:5], 3))
+    #print(data.shape, chan_names)
+    #print(np.round(data[:, 0:5], 3))
 
     # create metadata for raw edf
     ch_names = []
@@ -27,11 +29,11 @@ def buildRawFromNpz(fs, filepath):
     info.set_montage('standard_1020')
 
     # save as raw format
-    raw = mne.io.RawArray(data, info)
+    raw = mne.io.RawArray(data, info, verbose='warning')
 
     # sample data is not in SI units, which is what mne raw expects
     # we have to scale the data to the expected uV range
-    raw.apply_function(lambda x: x * .2e-6)
+    raw.apply_function(lambda x: x * scaleFactor)
 
     return raw
 
@@ -48,11 +50,11 @@ def buildRawFromWav(filepath):
     info.set_montage('standard_1020')
 
     # save as raw format
-    raw = mne.io.RawArray(data, info)
+    raw = mne.io.RawArray(data, info, verbose='warning')
 
     # sample data is not in SI units, which is what mne raw expects
     # we have to scale the data to the expected uV range
-    raw.apply_function(lambda x: x * .2e-6)
+    raw.apply_function(lambda x: x * scaleFactor)
 
     return raw
 
@@ -64,13 +66,13 @@ def buildRawFromArray(fs, array):
     ch_types = ['eeg'] * num_chan
     info = mne.create_info(ch_names, ch_types=ch_types, sfreq=fs)
     # standard spatial orientation based on channel names
-    info.set_montage('standard_1020')
+    #info.set_montage('standard_1020')
 
     # save as raw format
-    raw = mne.io.RawArray(array, info)
+    raw = mne.io.RawArray(array, info, verbose='warning')
 
     # sample data is not in SI units, which is what mne raw expects
     # we have to scale the data to the expected uV range
-    raw.apply_function(lambda x: x * .2e-6)
+    raw.apply_function(lambda x: x * scaleFactor)
 
     return raw
