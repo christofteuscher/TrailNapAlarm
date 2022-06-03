@@ -1,6 +1,6 @@
 import yasa
 import numpy as np
-from pathlib import Path
+import pandas as pd
 from scipy.io.wavfile import read
 from mne.filter import filter_data
 import matplotlib.pyplot as plt
@@ -11,8 +11,22 @@ import matplotlib.pyplot as plt
 # yasa notebooks by Raphael Vallat
 # https://github.com/raphaelvallat/yasa/tree/master/notebooks
 
-def spindlePlot(fs,indata,epochNum):
-    title = 'spindles'
+# defined functions
+# mov avg to smooth plot
+def moving_avg(x, w):
+    return np.convolve(x, np.ones(w), 'valid') / w
+
+def applyFilt(data,w):
+    N = len(data)
+    v = np.zeros(N)
+    g = moving_avg(data,w)
+    if len(g) <= N:
+        v[:len(g)] = g
+    else:
+        v = g[:N]
+    return v
+
+def spindlePlot(fs,indata,epochNum,title,window):
 
     # extract specified epoch
     start = 30 * epochNum * fs
@@ -26,21 +40,33 @@ def spindlePlot(fs,indata,epochNum):
     sp = yasa.spindles_detect(data,fs)
     # check if sp detected spindles, if not, skip epoch
     if sp is None:
+        y = applyFilt(data,window)
         print("No spindles detected")
+        plt.figure(figsize=(14, 4))
+        plt.plot(t, y, 'k')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Amplitude (uV)')
+        plt.xlim([0, t[-1]])
+        plt.title(f'{title} stage sleep EEG data (no spindles detected)')
         return 1
+
+    print(sp.summary().size)
+
     # bool vector indicating for each sample
     mask = sp.get_mask()
 
-    spindles_highlight = data * mask
+    y = applyFilt(data,window)
+
+    spindles_highlight = y * mask
     spindles_highlight[spindles_highlight == 0] = np.nan
 
     plt.figure(figsize=(14, 4))
-    plt.plot(t, data, 'k')
+    plt.plot(t, y, 'k')
     plt.plot(t, spindles_highlight, 'indianred')
     plt.xlabel('Time (seconds)')
     plt.ylabel('Amplitude (uV)')
     plt.xlim([0, t[-1]])
-    plt.title('N2 sleep EEG data (2 spindles detected)')
+    plt.title(f'{title} stage sleep EEG data (spindles detected)')
     # plt.savefig('detection.png', dpi=300, bbox_inches='tight')
 
 def thresholdPlot(fs,indata,epochNum):
@@ -143,7 +169,7 @@ def thresholdPlot(fs,indata,epochNum):
     _ = plt.xlim(0, data[-1])
     #plt.savefig(f"{title}_movrms.png")
 
-def swPlot(fs,indata,epochNum,title):
+def swPlot(fs,indata,epochNum,title,window):
 
     # extract specified epoch
     start = 30 * epochNum * fs
@@ -157,6 +183,13 @@ def swPlot(fs,indata,epochNum,title):
     # check if sp detected spindles, if not, skip epoch
     if sw is None:
         print("No slow waves detected")
+        y = applyFilt(data,window)
+        plt.figure(figsize=(14, 4))
+        plt.plot(t, y, 'k')
+        plt.xlabel('Time (seconds)')
+        plt.ylabel('Amplitude (uV)')
+        plt.xlim([0, t[-1]])
+        plt.title(f'{title} stage sleep EEG data (no spindles detected)')
         return 1
     # To get the full detection dataframe, we use the .summary() method
     events = sw.summary()
@@ -165,11 +198,13 @@ def swPlot(fs,indata,epochNum,title):
     # mask indicating for each sample
     mask = sw.get_mask()
     
-    sw_highlight = data * mask
+    y = applyFilt(data,window)
+
+    sw_highlight = y * mask
     sw_highlight[sw_highlight == 0] = np.nan
 
     plt.figure(figsize=(16, 4.5))
-    plt.plot(t, data, 'k')
+    plt.plot(t, y, 'k')
     plt.plot(t, sw_highlight, 'indianred')
     plt.plot(events['NegPeak'], sw_highlight[(events['NegPeak'] * fs).astype(int)], 'bo', label='Negative peaks')
     plt.plot(events['PosPeak'], sw_highlight[(events['PosPeak'] * fs).astype(int)], 'go', label='Positive peaks')
@@ -178,6 +213,6 @@ def swPlot(fs,indata,epochNum,title):
     plt.xlabel('Time (seconds)')
     plt.ylabel('Amplitude (uV)')
     plt.xlim([0, t[-1]])
-    plt.title('sleep EEG data')
+    plt.title(f'{title} stage sleep EEG data')
     plt.legend()
     #plt.savefig(f"{title}_slowwaves.png")
