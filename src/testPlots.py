@@ -1,6 +1,5 @@
 import yasa
 import numpy as np
-import pandas as pd
 from scipy.io.wavfile import read
 from mne.filter import filter_data
 import matplotlib.pyplot as plt
@@ -47,7 +46,7 @@ def spindlePlot(fs,indata,epochNum,title,window):
         plt.xlabel('Time (seconds)')
         plt.ylabel('Amplitude (uV)')
         plt.xlim([0, t[-1]])
-        plt.title(f'{title} stage sleep EEG data (no spindles detected)')
+        plt.title(f'{title} stage sleep for epoch {epochNum} (no spindles detected)')
         return 1
 
     print(sp.summary().size)
@@ -66,7 +65,7 @@ def spindlePlot(fs,indata,epochNum,title,window):
     plt.xlabel('Time (seconds)')
     plt.ylabel('Amplitude (uV)')
     plt.xlim([0, t[-1]])
-    plt.title(f'{title} stage sleep EEG data (spindles detected)')
+    plt.title(f'{title} stage sleep for epoch {epochNum} (spindles detected)')
     # plt.savefig('detection.png', dpi=300, bbox_inches='tight')
 
 def thresholdPlot(fs,indata,epochNum):
@@ -189,7 +188,7 @@ def swPlot(fs,indata,epochNum,title,window):
         plt.xlabel('Time (seconds)')
         plt.ylabel('Amplitude (uV)')
         plt.xlim([0, t[-1]])
-        plt.title(f'{title} stage sleep EEG data (no spindles detected)')
+        plt.title(f'{title} stage sleep for epoch {epochNum} (no slow waves detected)')
         return 1
     # To get the full detection dataframe, we use the .summary() method
     events = sw.summary()
@@ -213,6 +212,6 @@ def swPlot(fs,indata,epochNum,title,window):
     plt.xlabel('Time (seconds)')
     plt.ylabel('Amplitude (uV)')
     plt.xlim([0, t[-1]])
-    plt.title(f'{title} stage sleep EEG data')
+    plt.title(f'{title} stage sleep for epoch {epochNum}')
     plt.legend()
     #plt.savefig(f"{title}_slowwaves.png")

@@ -2,6 +2,7 @@
 /res/data/generatedData/*
 /res/figures/generatedFigs/*
 /res/data/sessions/currentsession/*
+/res/data/testData/*
 !/res/data/generatedData/.gitkeep
 !/res/figures/generatedFigs/.gitkeep
 !/res/data/sessions/currentsession/.gitkeep

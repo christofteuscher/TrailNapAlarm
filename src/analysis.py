@@ -18,6 +18,7 @@ fullData = np.array([])
 # define arrays of yasa prediction arrays
 predictSets = []
 probSets = []
+
 # define minimum nap length
 minNapMinutes = 8
 minNapEpochs = minNapMinutes * 2
@@ -30,7 +31,7 @@ for line in sys.stdin:
 
     match line.split():
 
-        case ["QUIT"]:
+        case ["DONE"]:
             os.exit()
 
         case ["RESET"]:
@@ -41,6 +42,7 @@ for line in sys.stdin:
                 print("retreiving file ", filename)
             # get directory to save data to
             dirname = os.path.dirname(filename)
+            print(f'directory: {dirname}')
             # read file
             name = Path(filename).stem
             fs, epoch = read(filename)
@@ -72,11 +74,12 @@ for line in sys.stdin:
                 if count >= minN2epochs:
                     print("WAKEUP!")
                     break
-            
-with open('predictions.txt', 'w') as f:
-    for line in predictSets:
-        print(' '.join(line).replace('W','W ').replace('R','R '), file=f)
+if dirname:
 
-with open('predictprob.txt', 'w') as f:
-    for line in probSets:
-        print(line, file=f)
+    with open(f'{dirname}/predictions.txt', 'w') as f:
+        for line in predictSets:
+            print(' '.join(line).replace('W','W ').replace('R','R '), file=f)
+
+    with open(f'{dirname}/predictprob.txt', 'w') as f:
+        for line in probSets:
+            print(line, file=f)
