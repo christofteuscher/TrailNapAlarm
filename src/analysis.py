@@ -74,8 +74,8 @@ for line in sys.stdin:
                 if count >= minN2epochs:
                     print("WAKEUP!")
                     break
-if dirname:
 
+if dirname:
     with open(f'{dirname}/predictions.txt', 'w') as f:
         for line in predictSets:
             print(' '.join(line).replace('W','W ').replace('R','R '), file=f)
