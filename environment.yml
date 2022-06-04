@@ -3,10 +3,11 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
+  - pip
   - numpy
   - scipy
   - matplotlib
   - mne
   - lightgbm
-  - pip
+  - pip:
     - yasa
