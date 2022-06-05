@@ -26,23 +26,37 @@ minN2epochs = 6
 
 # set up stream
 #os.environ["PYTHONUNBUFFERED"] = "1"
+dirname = None
+file_predictions = None
+file_probabilities = None
 
 for line in sys.stdin:
 
     match line.split():
 
         case ["DONE"]:
+            if file_predictions:
+                file_predictions.close()
+                file_predictions = None
+            if file_probabilities:
+                file_probabilities.close()
+                file_probabilities = None
             os.exit()
 
         case ["RESET"]:
-            print("Do Reset")
+            print("Do Reset", file=sys.stderr)
 
         case ["FILE", filename]:
             if __debug__:
-                print("retreiving file ", filename)
+                print("retreiving file ", filename, file=sys.stderr)
             # get directory to save data to
             dirname = os.path.dirname(filename)
-            print(f'directory: {dirname}')
+            if file_predictions is None:
+                file_predictions = open(f'{dirname}/predictions.txt', 'w')
+            if file_probabilities is None:
+                file_probabilities = open(f'{dirname}/predictprob.txt', 'w')
+
+            print(f'directory: {dirname}', file=sys.stderr)
             # read file
             name = Path(filename).stem
             fs, epoch = read(filename)
@@ -63,23 +77,19 @@ for line in sys.stdin:
                 y_pred = sls.predict()
                 y_prob = sls.predict_proba()
                 # add array of predictions for this chunk to array of chunk predictions
-                predictSets.append(y_pred)
-                probSets.append(y_prob)
+                #predictSets.append(y_pred)
+                #probSets.append(y_prob)
+
+                print(' '.join(y_pred).replace('W','W ').replace('R','R '), file=file_predictions)
+                print(y_prob, file=file_probabilities)
+
                 if __debug__:
-                    print(f"{len(fullData)/fs} seconds analyzed")
+                    print(f"{len(fullData)/fs} seconds analyzed", file=sys.stderr)
 
             if len(fullData) > minNapSamples:
                 count = np.count_nonzero(y_pred[minNapEpochs:] == "N2")
-                print(f"counted {count} N2 stages")
+                print(f"counted {count} N2 stages", file=sys.stderr)
                 if count >= minN2epochs:
-                    print("WAKEUP!")
+                    print("WAKEUP")
+                    print("WAKEUP!", file=sys.stderr)
                     break
-
-if dirname:
-    with open(f'{dirname}/predictions.txt', 'w') as f:
-        for line in predictSets:
-            print(' '.join(line).replace('W','W ').replace('R','R '), file=f)
-
-    with open(f'{dirname}/predictprob.txt', 'w') as f:
-        for line in probSets:
-            print(line, file=f)
