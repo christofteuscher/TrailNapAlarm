@@ -21,5 +21,5 @@ for file in files:
     time.sleep(.01)
     print("FILE", file, flush=True)
 
-# py -3 send.py | py -3 -u read.py
+# py -3 send.py | py -3 -u analysis.py
 # python src/send.py | python -u src/analysis.py
