@@ -47,6 +47,7 @@ def spindlePlot(fs,indata,epochNum,title,window):
         plt.ylabel('Amplitude (uV)')
         plt.xlim([0, t[-1]])
         plt.title(f'{title} stage sleep for epoch {epochNum} (no spindles detected)')
+        plt.tight_layout()
         return 1
 
     print(sp.summary().size)
@@ -66,6 +67,7 @@ def spindlePlot(fs,indata,epochNum,title,window):
     plt.ylabel('Amplitude (uV)')
     plt.xlim([0, t[-1]])
     plt.title(f'{title} stage sleep for epoch {epochNum} (spindles detected)')
+    plt.tight_layout()
     # plt.savefig('detection.png', dpi=300, bbox_inches='tight')
 
 def thresholdPlot(fs,indata,epochNum):
@@ -131,6 +133,7 @@ def thresholdPlot(fs,indata,epochNum):
     ax2.axhline(0.20, ls=':', lw=2, color='indianred', label='Threshold #1')
     plt.legend()
     _ = ax2.set_title('Relative power in the sigma band')
+    plt.tight_layout()
     # save figure
     #plt.savefig(f"{title}_sigma_rel_power.png")
 
@@ -149,6 +152,7 @@ def thresholdPlot(fs,indata,epochNum):
     plt.legend()
     plt.title('Moving correlation between $EEG_{bf}$ and $EEG_{\sigma}$')
     _ = plt.xlim(0, t[-1])
+    plt.tight_layout()
     #plt.savefig(f"{title}_movcorrel.png")
 
     # threshold 3: moving rms
@@ -166,6 +170,7 @@ def thresholdPlot(fs,indata,epochNum):
     plt.legend()
     plt.title('Moving RMS of $EEG_{\sigma}$')
     _ = plt.xlim(0, data[-1])
+    plt.tight_layout()
     #plt.savefig(f"{title}_movrms.png")
 
 def swPlot(fs,indata,epochNum,title,window):
@@ -189,6 +194,7 @@ def swPlot(fs,indata,epochNum,title,window):
         plt.ylabel('Amplitude (uV)')
         plt.xlim([0, t[-1]])
         plt.title(f'{title} stage sleep for epoch {epochNum} (no slow waves detected)')
+        plt.tight_layout()
         return 1
     # To get the full detection dataframe, we use the .summary() method
     events = sw.summary()
@@ -214,4 +220,5 @@ def swPlot(fs,indata,epochNum,title,window):
     plt.xlim([0, t[-1]])
     plt.title(f'{title} stage sleep for epoch {epochNum}')
     plt.legend()
+    plt.tight_layout()
     #plt.savefig(f"{title}_slowwaves.png")

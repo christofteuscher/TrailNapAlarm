@@ -48,9 +48,10 @@ freq_broad = (1, 30)
 filtered = filter_data(data, fs, freq_broad[0], freq_broad[1], method='fir',verbose=0)
 
 # iterate over several epochs and plot each one
-for i in range(12):
-    epoch = 22 + i
-    spindlePlot(fs,filtered,epoch,title,window)
-    #swPlot(fs,filtered,epoch,title,window)
-plt.tight_layout()
+#for i in range(2):
+#    epoch = 22 + i
+#    spindlePlot(fs,filtered,epoch,title,window)
+#    #swPlot(fs,filtered,epoch,title,window)
+
+spindlePlot(fs,filtered,epoch,title,window)
 plt.show()

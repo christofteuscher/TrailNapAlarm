@@ -6,7 +6,19 @@ from pathlib import Path
 from scipy.io.wavfile import read
 import os
 
+# USER PREFERENCES
+# define min/max nap length
+# and N2 threshold
+minNapMinutes = 8
+maxNapMinutes = 30
+minN2epochs = 6
+
+# this program also saves the sleep stage predictions for each epoch for each set of data in a session
+# as well as the probabilities of that prediction into two files stored in the same directory as the WAV files
+
 # suppress sklearn pickle warning
+# warns about unpickling from older version of sklearn
+# this may or may not become an issue with library updates
 def warn(*args, **kwargs):
     pass
 import warnings
@@ -19,10 +31,12 @@ fullData = np.array([])
 predictSets = []
 probSets = []
 
-# define minimum nap length
-minNapMinutes = 8
+# put user preferences into epoch dimensions
 minNapEpochs = minNapMinutes * 2
-minN2epochs = 6
+maxNapEpochs = maxNapMinutes * 2
+# define buffer of new epochs to not count until there is more data to give it context
+epochStart = 9
+epochBuffer = 6
 
 # set up stream
 #os.environ["PYTHONUNBUFFERED"] = "1"
@@ -62,7 +76,7 @@ for line in sys.stdin:
             fs, epoch = read(filename)
             # 5 min minimum length of data to analyse
             Nmin = fs * 60 * 5
-            # minimum nap length in samples
+            # nap parameters in samples
             minNapSamples = fs * minNapMinutes * 60
             # concat to fullData
             fullData = np.concatenate((fullData,epoch), axis=None)
@@ -87,9 +101,13 @@ for line in sys.stdin:
                     print(f"{len(fullData)/fs} seconds analyzed", file=sys.stderr)
 
             if len(fullData) > minNapSamples:
-                count = np.count_nonzero(y_pred[minNapEpochs:] == "N2")
+                count = np.count_nonzero(y_pred[9:-6] == "N2")
                 print(f"counted {count} N2 stages", file=sys.stderr)
                 if count >= minN2epochs:
                     print("WAKEUP")
                     print("WAKEUP!", file=sys.stderr)
+                    break
+                elif len(y_pred) > maxNapEpochs:
+                    print("WAKEUP")
+                    print("Surpassed maximum sleep duration without reaching N2 threshold", file=sys.stderr)
                     break
