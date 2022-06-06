@@ -55,7 +55,7 @@ for line in sys.stdin:
             if file_probabilities:
                 file_probabilities.close()
                 file_probabilities = None
-            os.exit()
+            exit()
 
         case ["RESET"]:
             print("Do Reset", file=sys.stderr)

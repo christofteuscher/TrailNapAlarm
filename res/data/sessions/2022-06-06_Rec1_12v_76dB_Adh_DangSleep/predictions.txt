@@ -1,0 +1,17 @@
+W  W  W  W  N2 N2 N2 W  W  N1
+W  W  W  W  N2 N2 N2 W  R  W  W 
+W  W  W  W  N2 W  N2 W  R  R  W  R 
+W  W  W  N2 W  N2 N2 W  N2 W  W  R  R 
+W  W  W  N2 N2 W  N2 N2 N2 N2 W  W  W  W 
+W  W  W  N2 W  W  N2 N1 N2 N2 W  W  R  W  W 
+W  W  W  N2 W  W  N2 N1 N2 N2 W  N2 R  W  W  W 
+W  W  W  N2 W  W  N2 N1 N2 N2 W  N2 N2 N2 W  N1 W 
+W  W  W  N2 W  W  N2 N1 N2 N2 W  N2 N2 N2 N2 N1 W  W 
+W  W  W  N2 W  W  N2 N1 N2 N2 W  N2 N2 N2 N2 N1 N2 W  W 
+W  W  W  N2 W  W  N2 N2 N2 N2 W  N2 N2 N2 N2 N2 W  N2 W  W 
+W  W  W  N2 W  W  N2 N2 N2 N2 W  W  N2 N2 N2 N1 W  W  W  W  W 
+W  W  W  N2 W  W  N2 N2 N2 N2 W  W  N2 N2 N2 N2 W  W  W  W  W  W 
+W  W  W  N2 W  W  N2 N2 N2 N2 W  W  N2 N2 N2 N1 N2 N2 W  W  W  W  W 
+W  W  W  N2 W  W  N2 N2 N2 N2 R  W  R  N2 N2 N1 N2 N2 W  W  W  W  W  W 
+W  W  W  W  W  W  N2 N2 N2 N1 W  W  R  R  N2 N1 W  N2 N2 W  W  W  W  W  W 
+W  W  W  W  W  W  N2 N2 N2 N2 W  N1 R  N2 N1 N1 N2 N2 N2 N2 W  W  W  W  W  W 
