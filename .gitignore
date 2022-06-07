@@ -6,6 +6,7 @@
 !/res/data/generatedData/.gitkeep
 !/res/figures/generatedFigs/.gitkeep
 !/res/data/sessions/currentsession/.gitkeep
+kicad/TrailAlarm-backups
 
 # Mac files
 .DS_Store
