@@ -11,16 +11,19 @@ This program implements the YASA sleep staging algorithm and determines when to 
 
 This module contains definitions for functions which translate different data formats into the MNE "raw" object type. The YASA SleepStaging class takes a raw object type. The current formats are .npz, .wav, and array with a corresponding sample rate.
 
-def buildRawFromNpz(fs, filepath)
+`def buildRawFromNpz(fs, filepath)
+
     fs:         integer, sample rate
     filepath:   string, path to the file
 
 def buildRawFromWav(filepath)
+
     filepath:   string, path to the file
 
 def buildRawFromArray(fs, array)
+
     fs:         integer, sample rate
-    filepath:   string, path to the file
+    filepath:   string, path to the file`
 
 # collectData_0.1.py
 
@@ -60,13 +63,13 @@ Uses functions defined in testPlots.py to make certain plots and analyses on dat
 
 This module contains definitions for functions used in test.py.
 
-def spindlePlot(fs,indata,epochNum,title,window)
+`def spindlePlot(fs,indata,epochNum,title,window)
 
     fs:         integer, specifies the sample rate of the data
     indata:     array of real-valued data to be plotted
     epochNum:   integer, which 30 second segment to display
     title:      string, the predicted sleep stage of the plotted epoch
-    window:     integer, length in samples of the moving average window to smooth plot output (doesn't affect analysis)
+    window:     integer, length in samples of the moving average window to smooth plot output (doesn't affect analysis)`
 
 The other functions in testPlots.py weren't used in this project.
 
