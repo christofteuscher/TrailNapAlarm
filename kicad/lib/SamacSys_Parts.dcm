@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NE555DR
+D Single Precision Timer
+K
+F http://www.ti.com/lit/ds/symlink/ne555.pdf
+$ENDCMP
+#
+$CMP MAX865EUA+T
+D MAXIM INTEGRATED PRODUCTS - MAX865EUA+T - CHARGE PUMP, 0.2A, 12V, UMAX-8
+K
+F https://datasheets.maximintegrated.com/en/ds/MAX865.pdf
+$ENDCMP
+#
+#End Doc Library
