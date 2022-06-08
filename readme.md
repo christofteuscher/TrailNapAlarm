@@ -25,7 +25,7 @@ To start developing this project:
    
    `conda env create -f environment.yml` 
    
-  to set up a new conda environment and install the required python libraries into it.
+   to set up a new conda environment and install the required python libraries into it.
 
 ## Directory structure
 * [src]()
