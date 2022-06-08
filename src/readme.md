@@ -1,19 +1,72 @@
-This folder contains functions to break up a yasa dataset into 60 second epochs and then analyze each epoch with plots using yasa algorithms for sleep spindle and slow wave detection.
+## Description of program files and their context
 
-Required libraries:
-* numpy
-* scipy
-* yasa
-* mne
-* matplotlib
+# analysis.py
 
-It is recommended to use a virtual environment to easily keep track of dependencies. Anaconda is a package handler for python which is useful for this, and includes some required libraries.
+This program implements the YASA sleep staging algorithm and determines when to wake the user based on a specified N2 epoch count threshold. It takes a file path as a command line argument and concatenates it to an ongoing array of the current sleep session's EEG time series data, with a corresponding sample rate. Once the array of data has surpassed the minimum analysis duration of 5 minutes, as well as the minimum sleep duration specified, it creates a SleepStaging instance to determine the predicted sleep stages for each epoch of recorded data. It repeats this each time it recieves a new filepath, which is every 30 seconds. Once the previous conditions are met, and an N2 threshold is surpassed or the maximum sleep duration has passed, the program activates the alarm system.
 
-The order in which to use these programs is:
+# btnWake.py
 
-* datasetup.py breaks apart the yasa dataset included in ../res/ subfolder into 60s epochs
-* the epochs are stored as wav files in ../res/data/generatedData
-* test.py calls functions in defEpoch.py using the Epoch class
-* figures are produced which will be stored in ../res/generatedFigs/ subfolder
 
-The generatedData and generatedFigs subfolders are ignored by git so that they don't get clogged with each person's use of the program.
+# buildRaw.py
+
+This module contains definitions for functions which translate different data formats into the MNE "raw" object type. The YASA SleepStaging class takes a raw object type. The current formats are .npz, .wav, and array with a corresponding sample rate.
+
+def buildRawFromNpz(fs, filepath)
+    fs:         integer, sample rate
+    filepath:   string, path to the file
+
+def buildRawFromWav(filepath)
+    filepath:   string, path to the file
+
+def buildRawFromArray(fs, array)
+    fs:         integer, sample rate
+    filepath:   string, path to the file
+
+# collectData_0.1.py
+
+
+# collectData_0.2.py
+
+
+# dataSetup.py
+
+This program is used entirely for testing and development, and is not implemented in the functioning of the device itself. It was written as a sandboxing tool for reading different recording file times, from various datasets and devices, and cutting them up into 30 second .wav files to simulate data being fed to analysis.py
+
+# every.py
+
+
+# pollData.py
+
+
+# pollStart.py
+
+
+# read.py
+
+A test file used in conjunction with send.py. This program is piped a command and a file name from send.py and follows the command sent.
+
+# record.py
+
+
+# send.py
+
+A test file that creates a list of files in a directory, then sends the path name to analysis.py one at a time to test the functioning of piping recording file names to the analysis program.
+
+# test.py
+
+Uses functions defined in testPlots.py to make certain plots and analyses on datasets gathered by the team. Given a directory with a .wav file of sleep data, it returns the predicted sleep stages of that dataset and makes a plot of a specified epoch with any detected sleep spindles highlighted.
+
+# testPlots.py
+
+This module contains definitions for functions used in test.py.
+
+def spindlePlot(fs,indata,epochNum,title,window)
+
+    fs:         integer, specifies the sample rate of the data
+    indata:     array of real-valued data to be plotted
+    epochNum:   integer, which 30 second segment to display
+    title:      string, the predicted sleep stage of the plotted epoch
+    window:     integer, length in samples of the moving average window to smooth plot output (doesn't affect analysis)
+
+The other functions in testPlots.py weren't used in this project.
+
