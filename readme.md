@@ -21,7 +21,11 @@ This project is unfinished and serves only as a proof-of-concept. The intention 
 To start developing this project:
 1. Clone this repository
 2. Install [conda mini-forge](https://github.com/conda-forge/miniforge) package handler.
-3. In the terminal, go to the home directory of this repo and run the command `conda env create -f environment.yml` to set up a new conda environment and install the required python libraries into it.
+3. In the terminal, go to the home directory of this repo and run the command 
+   
+   `conda env create -f environment.yml` 
+   
+  to set up a new conda environment and install the required python libraries into it.
 
 ## Directory structure
 * [src]()
