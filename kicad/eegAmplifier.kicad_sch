@@ -487,11 +487,11 @@
         )
       )
     )
-    (symbol "power:GNDS" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+    (symbol "power:GND" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
       (property "Reference" "#PWR" (id 0) (at 0 -6.35 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "Value" "GNDS" (id 1) (at 0 -3.81 0)
+      (property "Value" "GND" (id 1) (at 0 -3.81 0)
         (effects (font (size 1.27 1.27)))
       )
       (property "Footprint" "" (id 2) (at 0 0 0)
@@ -503,10 +503,10 @@
       (property "ki_keywords" "power-flag" (id 4) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "Power symbol creates a global label with name \"GNDS\" , signal ground" (id 5) (at 0 0 0)
+      (property "ki_description" "Power symbol creates a global label with name \"GND\" , ground" (id 5) (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "GNDS_0_1"
+      (symbol "GND_0_1"
         (polyline
           (pts
             (xy 0 0)
@@ -520,15 +520,14 @@
           (fill (type none))
         )
       )
-      (symbol "GNDS_1_1"
+      (symbol "GND_1_1"
         (pin power_in line (at 0 0 270) (length 0) hide
-          (name "GNDS" (effects (font (size 1.27 1.27))))
+          (name "GND" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
         )
       )
     )
   )
-
 
   (junction (at 217.17 123.19) (diameter 0) (color 0 0 0 0)
     (uuid 06a61792-0864-44c2-ab1c-ff3bd580b0f1)
@@ -1194,22 +1193,6 @@
     (pin "2" (uuid 872c5aca-b779-4112-9ee8-02025621e065))
   )
 
-  (symbol (lib_id "Amplifier_Operational:TLC274") (at 102.87 76.2 180) (unit 1)
-    (in_bom yes) (on_board yes) (fields_autoplaced)
-    (uuid 40f3fc03-0782-49ee-9294-843ef060ea3f)
-    (property "Reference" "U1" (id 0) (at 102.87 66.04 0))
-    (property "Value" "TLC274" (id 1) (at 102.87 68.58 0))
-    (property "Footprint" "Package_DIP:DIP-14_W7.62mm_LongPads" (id 2) (at 104.14 78.74 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "http://www.ti.com/lit/ds/symlink/tlc274.pdf" (id 3) (at 101.6 81.28 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 4adaff57-26c7-4905-97ea-856fcf684964))
-    (pin "2" (uuid 5c48ea32-915e-4bdd-99ff-d822f735a0be))
-    (pin "3" (uuid 5c2ed8f4-3c7a-47c3-a0f8-46b931ada725))
-  )
-
   (symbol (lib_id "Device:R_Small_US") (at 102.87 55.88 90) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 486c747e-9c50-40cb-9b2b-945f9eb8e5b8)
@@ -1361,6 +1344,22 @@
     (pin "8" (uuid 6d543ddc-0dde-4b8d-81e9-6042fb7e0fbc))
   )
 
+  (symbol (lib_id "Amplifier_Operational:TLC274") (at 102.87 76.2 180) (unit 3)
+    (in_bom yes) (on_board yes) (fields_autoplaced)
+    (uuid 8146926b-be77-4d76-864d-f13a967ae017)
+    (property "Reference" "U1" (id 0) (at 102.87 66.04 0))
+    (property "Value" "TLC274" (id 1) (at 102.87 68.58 0))
+    (property "Footprint" "Package_DIP:DIP-14_W7.62mm_LongPads" (id 2) (at 104.14 78.74 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "http://www.ti.com/lit/ds/symlink/tlc274.pdf" (id 3) (at 101.6 81.28 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "10" (uuid b5bf8461-ccb6-48f5-8cdd-044d3affaee7))
+    (pin "8" (uuid 0cecfa83-d19f-45c5-9723-827ae6e59baf))
+    (pin "9" (uuid e25c8671-d794-4c73-84e5-2281d8bec7dd))
+  )
+
   (symbol (lib_id "Device:R_Small_US") (at 201.93 143.51 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 8af06869-97cc-4634-a167-7f0f587b10e2)
@@ -1396,7 +1395,7 @@
     (pin "3" (uuid 6426d00c-225a-4439-ad08-10247ab5ba2d))
   )
 
-  (symbol (lib_id "power:GNDS") (at 128.27 111.76 0) (unit 1)
+  (symbol (lib_id "power:GND") (at 128.27 111.76 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 9a24d43f-4fac-4d1a-911d-231a32b85724)
     (property "Reference" "#PWR025" (id 0) (at 128.27 118.11 0)
@@ -1479,7 +1478,7 @@
     (pin "2" (uuid 73efe356-76ff-485b-aa1d-bf93be14ac24))
   )
 
-  (symbol (lib_id "power:GNDS") (at 166.37 146.05 0) (unit 1)
+  (symbol (lib_id "power:GND") (at 166.37 146.05 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid cb051ee6-1039-41b3-ae26-98d0b80ae266)
     (property "Reference" "#PWR026" (id 0) (at 166.37 152.4 0)
