@@ -1,3 +1,4 @@
+# Sample code for pipe commands
 
 import sys
 import numpy as np
