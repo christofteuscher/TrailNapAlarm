@@ -30,12 +30,12 @@ To start developing this project:
 ## Directory structure
 * [src](https://github.com/cteusche/TrailNapAlarm/tree/main/src)
     * Source code files belong here
-* [tools](https://github.com/cteusche/TrailNapAlarm/tree/main/src)
+* [tools](https://github.com/cteusche/TrailNapAlarm/tree/main/tools)
     * Tools like Makefile and other scripts belong here
-* [docs](https://github.com/cteusche/tree/main/TrailNapAlarm/docs)
+* [docs](https://github.com/cteusche/TrailNapAlarm/tree/main/docs)
     * Documentation files belong here
-* [dep](https://github.com/cteusche/tree/main/TrailNapAlarm/dep)
+* [dep](https://github.com/cteusche/TrailNapAlarm/tree/main/dep)
     * Dependencies belong here
-* [res](https://github.com/cteusche/tree/main/TrailNapAlarm/res)
+* [res](https://github.com/cteusche/TrailNapAlarm/tree/main/res)
     * Resource files belong here
 
