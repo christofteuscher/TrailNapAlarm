@@ -1,0 +1,35 @@
+
+# Check script run with root privilages
+if [ $(/usr/bin/id -u) -ne 0 ]; then
+    echo "Please run with 'sudo $0' or in 'sudo -s' environment." && exit
+fi
+
+
+#!/bin/bash
+#
+# Set the default gateway, nameservers and date
+# automatically. This script needs to be
+# called via init.d
+
+## Add a default gateway
+/sbin/route add default gw 192.168.7.1
+
+## add the nameservers if necessary
+#grep -q 8.8.8.8 /etc/resolv.conf
+#if [ "$?" -ne "0" ]; then
+#        echo "nameserver 8.8.4.4" >> /etc/resolv.conf
+#        echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+#fi
+
+grep -q 1.1.1.1 /etc/resolv.conf
+if [ "$?" -ne "0" ]; then
+        echo "nameserver 1.1.1.1" >> /etc/resolv.conf
+        echo "nameserver 1.0.0.1" >> /etc/resolv.conf
+fi
+
+## set the date
+#/usr/sbin/ntpdate pool.ntp.org
+
+ping -c 4 -W 1 8.8.8.8
+ping -c 4 -W 1 pdx.edu
+
