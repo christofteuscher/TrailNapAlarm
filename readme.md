@@ -28,9 +28,9 @@ To start developing this project:
    to set up a new conda environment and install the required python libraries into it.
 
 ## Directory structure
-* [src](https://github.com/cteusche/tree/main/TrailNapAlarm/src)
+* [src](https://github.com/cteusche/TrailNapAlarm/tree/main/src)
     * Source code files belong here
-* [tools](https://github.com/cteusche/tree/main/TrailNapAlarm/tools)
+* [tools](https://github.com/cteusche/TrailNapAlarm/tree/main/src)
     * Tools like Makefile and other scripts belong here
 * [docs](https://github.com/cteusche/tree/main/TrailNapAlarm/docs)
     * Documentation files belong here
