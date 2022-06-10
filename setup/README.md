@@ -16,12 +16,13 @@ pip3 install --no-deps mne==1.0.3
 pip3 install --no-deps pandas==1.4.2 # No version.
 pip3 install --no-deps pandas==1.3.5 # Largest version found.
 pip3 install pandas==1.3.5 # Has reasonable ammount of things
-# builds a numpy which takes a very very long time...
+> builds a numpy which takes a very very long time...
+
 pip3 install sklearn
 > Successfully installed joblib-1.1.0 scikit-learn-1.0.2 sklearn-0.0 threadpoolctl-3.1.0
 
 `debian@beaglebone:~/Capstone/setup/TrailNapAlarm$ source ./test`
-> Length of files: 50
+>``` Length of files: 50
 > Traceback (most recent call last):
 >   File "src/analysis.py", line 1, in <module>
 >     import yasa
@@ -31,27 +32,28 @@ pip3 install sklearn
 >     from .numba import _detrend, _rms
 >   File "/home/debian/.local/lib/python3.7/site-packages/yasa/numba.py", line 5, in <module>
 >     from numba import jit
-> ModuleNotFoundError: No module named 'numba'
+> ModuleNotFoundError: No module named 'numba'```
 
 `pip3 install numba`
+> ```
 > Install Failed with missing llvmlite.
-> https://llvmlite.readthedocs.io/en/latest/admin-guide/install.html#using-pip
+> https://llvmlite.readthedocs.io/en/latest/admin-guide/install.html#using-pip```
 
 `sudo apt install python3-llvmlite`
-> Need to get 36.2 MB of archives.
+> ```Need to get 36.2 MB of archives.
 > After this operation, 211 MB of additional disk space will be used.
-> Do you want to continue? [Y/n] Y
+> Do you want to continue? [Y/n] Y```
 
 `pip3 install numba`
-> RuntimeError: Could not find a `llvm-config` binary. There are a number of reasons this could occur, please see: https://llvmlite.readthedocs.io/en/latest/admin-guide/install.html#using-pip for help.
+> `RuntimeError: Could not find a `llvm-config` binary. There are a number of reasons this could occur, please see: https://llvmlite.readthedocs.io/en/latest/admin-guide/install.html#using-pip for help.`
 
 `sudo apt install python3-numb`
-> Need to get 6,632 kB of archives.
+> ```Need to get 6,632 kB of archives.
 > After this operation, 28.2 MB of additional disk space will be used.
-> Do you want to continue? [Y/n] Y
+> Do you want to continue? [Y/n] Y```
 
 `source ./test`
-> Length of files: 50
+> ```Length of files: 50
 > /usr/lib/python3/dist-packages/numba/errors.py:104: UserWarning: Insufficiently recent colorama version found. Numba requires colorama >= 0.3.9
 >   warnings.warn(msg)
 > Traceback (most recent call last):
@@ -61,10 +63,10 @@ pip3 install sklearn
 >     from .features import *
 >   File "/home/debian/.local/lib/python3.7/site-packages/yasa/features.py", line 24, in <module>
 >     import antropy as ant
-> ModuleNotFoundError: No module named 'antropy'
+> ModuleNotFoundError: No module named 'antropy'```
 
 `sudo apt install python3-sklearn-lib`
-> Reading package lists... Done
+> ```Reading package lists... Done
 > Building dependency tree
 > Reading state information... Done
 > The following additional packages will be installed:
@@ -74,7 +76,7 @@ pip3 install sklearn
 > 0 upgraded, 2 newly installed, 0 to remove and 171 not upgraded.
 > Need to get 3,665 kB of archives.
 > After this operation, 12.9 MB of additional disk space will be used.
-> Do you want to continue? [Y/n] Y
+> Do you want to continue? [Y/n] Y```
 
 `pip install -U pip`
 >  Updated.
@@ -83,60 +85,7 @@ pip3 install sklearn
 `pip install antropy`
 > Out of Space.
 
-
-
-### Resize Main system Partition
-
-Default SD card config does not use all of the space. We will upgrade it. [Guide](http://eprojects.ljcv.net/2018/06/pocketbeagle-how-to-increase-root.html).
-
-```
-sudo -s
-```
-
-> Command (m for help): p
-> 
-> Disk /dev/mmcblk0: 14.4 GiB, 15489564672 bytes, 30253056 sectors
-> Units: sectors of 1 * 512 = 512 bytes
-> Sector size (logical/physical): 512 bytes / 512 bytes
-> I/O size (minimum/optimal): 512 bytes / 512 bytes
-> Disklabel type: dos
-> Disk identifier: 0x3244345d
-> 
-> Device         Boot Start     End Sectors  Size Id Type
-> /dev/mmcblk0p1 *     8192 7372799 7364608  3.5G 83 Linux
-
-> Command (m for help): p
-> 
->Disk /dev/mmcblk0: 14.4 GiB, 15489564672 bytes, 30253056 sectors
->Units: sectors of 1 * 512 = 512 bytes
->Sector size (logical/physical): 512 bytes / 512 bytes
->I/O size (minimum/optimal): 512 bytes / 512 bytes
->Disklabel type: dos
->Disk identifier: 0x3244345d
->
->Device         Boot Start      End  Sectors  Size Id Type
->/dev/mmcblk0p1       8192 30253055 30244864 14.4G 83 Linux
-
-`reboot`
-
-root@beaglebone:/home/debian# `resize2fs /dev/mmcblk0p1`
-> resize2fs 1.44.5 (15-Dec-2018)
-> Filesystem at /dev/mmcblk0p1 is mounted on /; on-line resizing required
-> old_desc_blocks = 1, new_desc_blocks = 2
-> The filesystem on /dev/mmcblk0p1 is now 3780608 (4k) blocks long.
-
-root@beaglebone:/home/debian# `df -h`
-> Filesystem      Size  Used Avail Use% Mounted on
-> udev            215M     0  215M   0% /dev
-> tmpfs            49M  1.5M   47M   4% /run
-> /dev/mmcblk0p1   15G  3.2G   11G  24% /
-> tmpfs           242M     0  242M   0% /dev/shm
-> tmpfs           5.0M     0  5.0M   0% /run/lock
-> tmpfs           242M     0  242M   0% /sys/fs/cgroup
-> tmpfs            49M     0   49M   0% /run/user/1000
-
-
-### Continue Installation
+Resize Main system Partition. Continue Installation.
 
 `pip3 install antropy`
 
@@ -144,13 +93,13 @@ root@beaglebone:/home/debian# `df -h`
 > Installed and good.
 
 `souce ./test`
-> source ./test
+> ```source ./test
 > Length of files: 50
 > /usr/lib/python3/dist-packages/numba/errors.py:104: UserWarning: Insufficiently recent colorama version found. Numba requires colorama >= 0.3.9
->   warnings.warn(msg)
+>   warnings.warn(msg)```
 
 `pip3 show colorama`
-> Name: colorama
+> ```Name: colorama
 > Version: 0.3.7
 > Summary: Cross-platform colored terminal text.
 > Home-page: https://github.com/tartley/colorama
@@ -159,13 +108,13 @@ root@beaglebone:/home/debian# `df -h`
 > License: BSD
 > Location: /usr/lib/python3/dist-packages
 > Requires:
-> Required-by:
+> Required-by:```
 
 `pip3 install -U colorama>=0.3.9`
-> Installed but did not report anything for some reason.
+> `Installed but did not report anything for some reason.`
 
 `pip3 show colorama`
-> Name: colorama
+> ```Name: colorama
 > Version: 0.4.4
 > Summary: Cross-platform colored terminal text.
 > Home-page: https://github.com/tartley/colorama
@@ -174,10 +123,10 @@ root@beaglebone:/home/debian# `df -h`
 > License: BSD
 > Location: /home/debian/.local/lib/python3.7/site-packages
 > Requires:
-> Required-by:
+> Required-by:```
 
 `souce ./test`
-> Length of files: 50
+> ```Length of files: 50
 > Traceback (most recent call last):
 >   File "/usr/lib/python3/dist-packages/numba/errors.py", line 617, in new_error_context
 >     yield
@@ -270,28 +219,28 @@ root@beaglebone:/home/debian# `df -h`
 >     for i_n, n in enumerate(nvals):
 >     ^
 > 
-> [1] During: lowering "array.79 = call empty_func.80(size_tuple.78, func=empty_func.80, args=(Var(size_tuple.78, /home/debian/.local/lib/python3.7/site-packages/antropy/fractal.py (313)),), kws=[], vararg=None)" at /home/debian/.local/lib/python3.7/site-packages/antropy/fractal.py (313)
+> [1] During: lowering "array.79 = call empty_func.80(size_tuple.78, func=empty_func.80, args=(Var(size_tuple.78, /home/debian/.local/lib/python3.7/site-packages/antropy/fractal.py (313)),), kws=[], vararg=None)" at /home/debian/.local/lib/python3.7/site-packages/antropy/fractal.py (313)```
 
 
 Something with dependencies could be wrong. Trying to update yasa again.
 
 `pip3 install -U yasa`
-> All checked. Still no luck.
+> `All checked. Still no luck.`
 
 Trying to use pip3 llvm.
 
 `pip3 install -U llvmlite`
-> Crash.
+> `Crash.`
 
 Following the llvmlite manual install [guide]().
 
 `sudo apt install libedit-dev`
 `sudo apt install llvm-dev`
-> Installed!
+> `Installed!`
 
 `pip3 install -U llvmlite`
-> RuntimeError: Building llvmlite requires LLVM 11.x.x, got '7.0.1'. Be sure to set LLVM_CONFIG to the right executable path.
-> Read the documentation at http://llvmlite.pydata.org/ for more information about building llvmlite.
+> ```RuntimeError: Building llvmlite requires LLVM 11.x.x, got '7.0.1'. Be sure to set LLVM_CONFIG to the right executable path.
+> Read the documentation at http://llvmlite.pydata.org/ for more information about building llvmlite.```
 
 ### Build LLVM
 
