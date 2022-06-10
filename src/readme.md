@@ -6,6 +6,40 @@ Python programs are connected via piping to form the core function.
 
 ## record.py
 
+Sample and record brainwave data from ADC. Send data to analysis.py for processing. 
+
+```
+Usage: record.py [options]
+
+Record sampled EEG data.
+
+Options:
+  -h, --help            show this help message and exit
+  --wav                 Save epoch as wav file format.
+  --csv                 Save epoch as csv file format. (Not Implemented)
+  -s EPOCH_SECONDS, --seconds=EPOCH_SECONDS
+                        Number of seconds in each epoch.
+  -n NUM_EPOCHS, --num_epochs=NUM_EPOCHS
+                        Number of epochs to record.
+  -v, --view_samples    Display samples at a reduced rate.
+```
+
+Command line options exist for testing and debug. We can set epoch size and the number of epochs to record as well as enable viewing scaled sample values directly from command line.
+
+We usually run with `python3 record.py --wav` and pipe output into the `analysis.py` program for processing.
+
+### ADS1115 Configuration
+
+We configure the ADS1115 to read data in the ±1.024 range. We sample data on the AIN2 pin with AIN3 as the zero reference. The configuration string `0b0_011_011_0_101_00000` is sent over I2C to initialize the continuous sampling. The device is configured to send interrupts when the data is ready.
+
+We setup an interrupt service routine to watch for interrupts on the device.
+
+### Checking the Timing of the ADS1115
+
+Readings were taking a longer then expected time for the configured Samples Per Second (SPS) value. Used the oscilloscope to check the timing of the interrupt pulses. We noticed the rate was not correct. Checked generated rate by scope for 250 SPS and measured 243 Hz. Added code to time elapsed time over the span of a 30s epoch. We have the optoion to correct the recored rate based on the first measured samplerate.
+
+*Timing is still a bit off. Perhaps we look into device driven data rate again.*
+
 ## analysis.py
 
 This program implements the YASA sleep staging algorithm and determines when to wake the user based on a specified N2 epoch count threshold. It takes a file path as a command line argument and concatenates it to an ongoing array of the current sleep session's EEG time series data, with a corresponding sample rate. Once the array of data has surpassed the minimum analysis duration of 5 minutes, as well as the minimum sleep duration specified, it creates a SleepStaging instance to determine the predicted sleep stages for each epoch of recorded data. It repeats this each time it recieves a new filepath, which is every 30 seconds. Once the previous conditions are met, and an N2 threshold is surpassed or the maximum sleep duration has passed, the program activates the alarm system.
@@ -20,6 +54,14 @@ minN2epochs: integer, the N2 threshold count. The program will wake the user aft
 
 ## buzzer.py
 
+This module contains code to play notificaitons on the buzzer. Commands are piped in line by line and the program reacts. Internally the program uses signals to time tones.
+
+- 'READY' plays when the device is connected and ready to start recording.
+- 'WAKEUP' command plays the alarm tone to awake the user.
+- 'STOP' stops any playing sounds.
+- 'TEST' plays a test signal to test the range of values.
+
+The program watches carefully for signals to stop playing a sound if anything goes wrong or the program is stopped.
 
 ## buildRaw.py
 
@@ -71,6 +113,14 @@ spindlePlot(fs,indata,epochNum,title,window)
     window:     integer, length in samples of the moving average window to smooth plot output (doesn't affect analysis)
 
 The other functions in testPlots.py weren't used in this project.
+
+## test_buzzer.py
+
+This module contains initial code to verify that the buzzer is working.
+
+## test_interrupt.py
+
+This module contains initial code to verify interrupt processing is working.
 
 ## Unused/Retired Files
 
