@@ -1,7 +1,7 @@
 
 # Setup PocketBeagle with YASA
 
-Our core processing libraries are [YASA] and [MNE]. Setting them up on the device was core to the success of the design. Unfortunatly we have failed at that and were unable to do so. For those that have continued this is a small list of what was tried.
+Our core processing libraries are [YASA](https://github.com/raphaelvallat/yasa) and [MNE](https://mne.tools/stable/index.html). Setting them up on the device was core to the success of the design. Unfortunatly we have failed at that and were unable to do so. For those that have continued this is a small list of what was tried.
 
 Many dependencies would cause crashes sometime durring the build of the python libraries.
 
