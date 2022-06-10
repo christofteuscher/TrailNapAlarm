@@ -35,7 +35,7 @@ class Buzzer():
         
     def stop(self):
         signal.setitimer(signal.ITIMER_REAL, 0, 0) # Turn off Timer.
-        PWM.stop(pin_buzzer)
+        PWM.stop(self.pin_buzzer)
         while not self.queue.empty():
             self.queue.get_nowait()
 
